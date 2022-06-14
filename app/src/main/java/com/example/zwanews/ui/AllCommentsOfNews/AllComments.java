@@ -27,13 +27,12 @@ public class AllComments extends AppCompatActivity {
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
+        listView = (ListView) findViewById(com.example.zwanews.R.id.ListView_comments);
 
-        listView=(ListView) findViewById(com.example.zwanews.R.id.ListView_comments);
+        ArrayList<Comments> list = new ArrayList<>();
+        list = (ArrayList<Comments>) getIntent().getExtras().getSerializable("data");
 
-        ArrayList<Comments>list= new ArrayList<>();
-        list= (ArrayList<Comments>)  getIntent().getExtras().getSerializable("data");
-
-        com.example.zwanews.ListviewCommentsAdapter.ListAdapter adapter=new  com.example.zwanews.ListviewCommentsAdapter.ListAdapter(this,list);
+        com.example.zwanews.ListviewCommentsAdapter.ListAdapter adapter = new com.example.zwanews.ListviewCommentsAdapter.ListAdapter(this, list);
 
         listView.setAdapter(adapter);
 
@@ -45,7 +44,6 @@ public class AllComments extends AppCompatActivity {
 
             }
         });
-
 
 
     }

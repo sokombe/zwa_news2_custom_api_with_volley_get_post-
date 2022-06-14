@@ -5,6 +5,7 @@ public class News {
     String url;
     String description;
     String title;
+
     public String getDate_news() {
         return date_news;
     }
@@ -15,11 +16,8 @@ public class News {
         this.description = description;
         this.title = title;
     }
-
-
     public News() {
     }
-
     public void setDate_news(String date_news) {
         this.date_news = date_news;
     }
@@ -47,10 +45,6 @@ public class News {
     public void setTitle(String title) {
         this.title = title;
     }
-
-
-
-
 
 
 }

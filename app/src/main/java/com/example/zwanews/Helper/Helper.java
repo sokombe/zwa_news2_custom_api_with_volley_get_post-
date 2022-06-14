@@ -50,9 +50,6 @@ public class Helper extends SQLiteOpenHelper {
     }
 
 
-
-
-
     public List<Comments> getAllComments(String date){
 
         final List<Comments> comment = new ArrayList<>();
@@ -93,9 +90,6 @@ public class Helper extends SQLiteOpenHelper {
             db.close();
         }
     }
-
-
-
 
     public int getCommentSize(String fk_new){
         SQLiteDatabase db=this.getReadableDatabase();

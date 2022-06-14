@@ -15,6 +15,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.zwanews.databinding.ActivityMainBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
@@ -29,7 +30,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
 
-
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -40,8 +40,6 @@ public class MainActivity extends AppCompatActivity {
 
     ImageView profile_image;
     TextView profile_name, profile_email;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,23 +102,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public  boolean onOptionsItemSelected(@NonNull MenuItem item){
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
+
             case R.id.action_logout:
-
 
                 new AlertDialog.Builder(this)
                         .setTitle("Déconnection")
                         .setMessage("Voulez-vous vraiment vous déconnecter ?")
-                        .setIcon(android.R.drawable.ic_dialog_alert)
+            //          .setIcon(android.R.drawable.ic_dialog_alert)
 
                         .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                           auth.signOut();
-                        startActivity(new Intent(MainActivity.this, Splash.class));
-                      finish();
+                                auth.signOut();
+                                startActivity(new Intent(MainActivity.this, Splash.class));
+                                finish();
                             }
                         })
 
@@ -155,7 +153,6 @@ public class MainActivity extends AppCompatActivity {
                         })
 
                         .show();
-
                 break;
         }
 
@@ -164,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
 //             finish();
 //        }
 
-        return  super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

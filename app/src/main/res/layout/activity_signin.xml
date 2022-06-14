@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.Login_and_splash.Signin"
-    android:background="@drawable/red_back">
+    android:background="@drawable/login_bac">
 
     <TextView
         android:layout_width="match_parent"
@@ -19,21 +19,23 @@
         android:layout_marginBottom="25dp"
         />
     <EditText
+        android:padding="10dp"
+        android:layout_margin="10dp"
         android:id="@+id/Edit_UserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nom d'utilisateur"
+        android:hint="Pseudo"
         android:inputType="text"/>
 
 
         <EditText
+            android:padding="10dp"
+            android:layout_margin="10dp"
             android:id="@+id/Emal_Signin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="Adresse email"
             android:inputType="textEmailAddress"/>
-
-
 
     <TextView
         android:layout_width="match_parent"
@@ -41,19 +43,16 @@
         android:layout_height="wrap_content"
         android:text=""
         android:textColor="@color/white"
-
         />
 
-
-
         <EditText
+            android:padding="10dp"
+            android:layout_margin="10dp"
             android:id="@+id/Password_sigin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Mot de passe"
             android:inputType="textPassword"/>
-
-
 
     <Button
         android:layout_width="match_parent"
@@ -65,7 +64,6 @@
         android:textColor="@color/white"
         android:id="@+id/Button_Signin"
         />
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -92,6 +90,4 @@
             android:textSize="22sp"/>
 
     </LinearLayout>
-
-
 </LinearLayout>

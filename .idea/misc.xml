@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/adisysapps/natives/ZwaNews/app/src/main/res/drawable-v24/button_btn.xml" value="0.1675" />
+        <entry key="..\:/adisysapps/natives/ZwaNews/app/src/main/res/drawable-v24/cate_bouton_background.xml" value="0.1675" />
         <entry key="..\:/adisysapps/natives/ZwaNews/app/src/main/res/drawable-v24/ic_baseline_content_copy_24.xml" value="0.1675" />
         <entry key="..\:/adisysapps/natives/ZwaNews/app/src/main/res/drawable-v24/ic_baseline_info_24.xml" value="0.1675" />
         <entry key="..\:/adisysapps/natives/ZwaNews/app/src/main/res/drawable-v24/ic_baseline_login_24.xml" value="0.1675" />
@@ -10,9 +12,13 @@
         <entry key="..\:/adisysapps/natives/ZwaNews/app/src/main/res/drawable-v24/ic_baseline_person_24.xml" value="0.1675" />
         <entry key="..\:/adisysapps/natives/ZwaNews/app/src/main/res/drawable-v24/ic_baseline_share_24.xml" value="0.1675" />
         <entry key="..\:/adisysapps/natives/ZwaNews/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1675" />
+        <entry key="..\:/adisysapps/natives/ZwaNews/app/src/main/res/drawable-v24/login_background.xml" value="0.1675" />
         <entry key="..\:/adisysapps/natives/ZwaNews/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.1675" />
         <entry key="..\:/adisysapps/natives/ZwaNews/app/src/main/res/drawable/ic_baseline_person_pin_24.xml" value="0.1675" />
         <entry key="..\:/adisysapps/natives/ZwaNews/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1675" />
+        <entry key="..\:/adisysapps/natives/ZwaNews/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.1675" />
+        <entry key="..\:/adisysapps/natives/ZwaNews/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.1675" />
+        <entry key="..\:/adisysapps/natives/ZwaNews/app/src/main/res/drawable/side_nav_bar.xml" value="0.1675" />
         <entry key="..\:/adisysapps/natives/ZwaNews/app/src/main/res/layout/activity_comments.xml" value="0.20923913043478262" />
         <entry key="..\:/adisysapps/natives/ZwaNews/app/src/main/res/layout/activity_detail.xml" value="0.17864583333333334" />
         <entry key="..\:/adisysapps/natives/ZwaNews/app/src/main/res/layout/activity_login.xml" value="0.20923913043478262" />

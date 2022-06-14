@@ -7,17 +7,16 @@ public class Users {
     String displayname;
     String Url;
 
-
-
-
     public Users(String displayname, String url) {
         this.displayname = displayname;
         Url = url;
     }
     public String getdisplayname() {
+
         return displayname;
     }
     public void setdisplayname(String displayName) {
+
         displayname = displayName;
     }
 
@@ -27,6 +26,7 @@ public class Users {
 
     @Exclude
     public String getUserEmail() {
+
         return userEmail;
     }
 
