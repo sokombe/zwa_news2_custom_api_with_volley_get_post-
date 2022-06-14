@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_actus">
+
+    <fragment
+        android:id="@+id/nav_actus"
+        android:name="com.example.zwanews.ui.actus.ActusFragment"
+        android:label="Toute l'actualité"
+        tools:layout="@layout/fragment_actus" />
+
+    <fragment
+        android:id="@+id/nav_user_profile"
+        android:name="com.example.zwanews.ui.userProfile.UserProfileFragment"
+        android:label="Mon profil"
+        tools:layout="@layout/fragment_user_profile" />
+
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="com.example.zwanews.ui.About.AboutFragment"
+        android:label="A propos de Zwa news"
+        tools:layout="@layout/fragment_about" />
+
+</navigation>

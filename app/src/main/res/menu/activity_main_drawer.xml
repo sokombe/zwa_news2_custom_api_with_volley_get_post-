@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+   >
+
+    <item android:title=""><menu></menu></item>
+
+
+        <item
+            android:id="@+id/nav_actus"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:title="Actualités" />
+        <item
+            android:id="@+id/nav_user_profile"
+            android:icon="@drawable/ic_baseline_person_pin_24"
+            android:title="Mon Profile" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_baseline_perm_device_information_24"
+            android:title="A propos" />
+
+</menu>

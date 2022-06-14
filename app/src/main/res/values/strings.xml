@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Zwa News</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    <string name="api_key">34123614cde84413a1b0af3451082009</string>
+    <string name="admob_app_id">ca-app-pub-6011922813320216~7932538097</string>
+    <string name="banner_id">ca-app-pub-6011922813320216/1324851426</string>
+    <string name="interstitial_id">ca-app-pub-1692433296455441/1774485552</string>
+    <string name="recompense_id">ca-app-pub-1692433296455441/6716940603</string>
+</resources>

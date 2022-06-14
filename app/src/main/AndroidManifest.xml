@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.zwanews">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Zwa News"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ZwaNews"
+        tools:targetApi="31">
+
+        //add meta
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/admob_app_id" />
+        />
+
+
+        <activity
+            android:name=".ui.AllCommentsOfNews.AllComments"
+            android:label="Commentaires"
+            android:exported="false"
+            android:screenOrientation="portrait"
+
+            />
+        <activity
+            android:name=".ui.Login_and_splash.Signin"
+            android:configChanges="orientation"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".ui.Login_and_splash.Login"
+            android:configChanges="orientation"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            android:label="Actualités"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
+        />
+        <activity
+            android:name=".ui.DetailNews.DetailActivity"
+            android:configChanges="orientation"
+            android:exported="false"
+            android:label="Détails"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity"
+            />
+        <activity
+            android:name=".ui.Login_and_splash.Splash"
+            android:configChanges="orientation"
+            android:exported="true"
+            android:label="Zwa News"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
