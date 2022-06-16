@@ -1,23 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".ui.userProfile.UserProfileFragment">
 
-    <TextView
-        android:id="@+id/text_home"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="User Profile"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            >
+
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="@drawable/login_bac"
+            android:padding="20dp"
+            >
+<ImageView
+    android:id="@+id/nav_user_profile_image"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:layout_centerVertical="true"
+    android:src="@drawable/user"
+
+    />
+
+      <TextView
+            android:id="@+id/nav_user_profile_name"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Gogo Sokombe"
+          android:textColor="@color/white"
+          android:layout_centerVertical="true"
+          android:layout_marginStart="10dp"
+          android:layout_toEndOf="@id/nav_user_profile_image"
+          android:fontFamily="serif"
+          android:includeFontPadding="false"
+          android:textSize="20dp"
+
+          />
+
+            <TextView
+            android:id="@+id/nav_user_profile_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="gogosokombe1@gmail.com"
+                android:layout_below="@id/nav_user_profile_name"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/nav_user_profile_image"
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            >
+            
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout_user_profile_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:hint="Nom complet"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                     android:drawableStart="@drawable/ic_baseline_person_pin_24"
+                    android:drawablePadding="10dp"
+                    android:text="Nom de l'utilisateur"
+
+                    />
+            </com.google.android.material.textfield.TextInputLayout>>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout_user_profile_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:hint="votre email"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_baseline_email_24"
+                    android:drawablePadding="10dp"
+                    android:text="Adresse email"
+
+                    />
+            </com.google.android.material.textfield.TextInputLayout>>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout_user_profile_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:hint="votre numéro de téléphone"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_baseline_local_phone_24"
+                    android:drawablePadding="10dp"
+                    android:text="Numéro de téléphone"
+
+                    />
+            </com.google.android.material.textfield.TextInputLayout>>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout_user_profile_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:hint="votre mot de passe"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_baseline_keyboard_24"
+                    android:drawablePadding="10dp"
+                    android:text="Mot de passe"
+
+                    />
+            </com.google.android.material.textfield.TextInputLayout>>
+
+            <Button
+                android:id="@+id/button_user_profile_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Mettre à jour"
+                android:textColor="@color/white"
+                android:background="@color/red"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
