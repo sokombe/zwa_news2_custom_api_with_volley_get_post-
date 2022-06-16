@@ -24,7 +24,7 @@ public class Splash extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(com.example.zwanews.R.layout.activity_splash);
+        setContentView(R.layout.activity_splash);
 
         // Initialise firebase
         auth = FirebaseAuth.getInstance();
@@ -35,7 +35,7 @@ public class Splash extends AppCompatActivity {
 
 
         appname.animate().translationY(-1400).setDuration(2700).setStartDelay(0);
-
+        
         lottieAnimationView.animate().translationX(2000).setDuration(2000).setStartDelay(2900);
 
 

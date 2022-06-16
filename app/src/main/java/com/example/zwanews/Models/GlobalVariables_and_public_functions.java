@@ -7,7 +7,7 @@ public class GlobalVariables_and_public_functions {
 
 // public variables ################################################################################
   public static   Map<String, Object> UsersProfiles=new HashMap<>();
-
+  public  static Users userProfile=new Users();
 
 
   // public functions###############################################################################

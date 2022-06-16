@@ -2,10 +2,15 @@ package com.example.zwanews;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 
+import com.example.zwanews.Models.GlobalVariables_and_public_functions;
+import com.example.zwanews.Models.Users;
 import com.example.zwanews.ui.Login_and_splash.Splash;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -17,13 +22,19 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.zwanews.databinding.ActivityMainBinding;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
 import android.content.DialogInterface;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -41,9 +52,22 @@ public class MainActivity extends AppCompatActivity {
     ImageView profile_image;
     TextView profile_name, profile_email;
 
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    CollectionReference UsersCollection = db.collection("Users");
+
+
+    private  String TAG="MainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        retriveUserProfile();
+
+        //View userprofile = View.inflate(this, R.layout.fragment_user_profile, null);
+        // init fields
+
+        // init user
 
         //set firebase auth
         auth = FirebaseAuth.getInstance();
@@ -86,14 +110,28 @@ public class MainActivity extends AppCompatActivity {
         if (auth.getCurrentUser() != null) {
             profile_name.setText(auth.getCurrentUser().getDisplayName());
             profile_email.setText(auth.getCurrentUser().getEmail());
+
         }
-        if (auth.getCurrentUser() != null && auth.getCurrentUser().getPhotoUrl() != null) {
+        if (auth.getCurrentUser().getPhotoUrl() != null) {
             Picasso.get().load(auth.getCurrentUser().getPhotoUrl()).placeholder(R.drawable.user).into(profile_image);
         } else {
             Picasso.get().load(R.drawable.user).into(profile_image);
         }
+
+
+       System.out.println("#######################################################");
+        System.out.println(auth.getCurrentUser().getPhotoUrl().toString());
     }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
+    }
+
+    //###################################################################################""
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -162,6 +200,43 @@ public class MainActivity extends AppCompatActivity {
 //        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void retriveUserProfile(){ // single note to read
+        UsersCollection.document(FirebaseAuth.getInstance().getCurrentUser().getEmail()).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                        if(documentSnapshot.exists()){
+
+                            Users users=documentSnapshot.toObject(Users.class);
+
+                            String name=users.getdisplayname();
+                            String url=users.getUrl();
+
+                            GlobalVariables_and_public_functions.userProfile.setdisplayname(name);
+                            GlobalVariables_and_public_functions.userProfile.setUrl(url);
+
+                           // Toast.makeText(MainActivity.this,GlobalVariables_and_public_functions.userProfile.getUrl() , Toast.LENGTH_SHORT).show();
+
+                        }
+                        else {
+                            Toast.makeText(MainActivity.this, "Document does not exist", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(MainActivity.this, " Error!!", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG,e.toString());
+                    }
+                })
+
+        ;
+
     }
 
     @Override

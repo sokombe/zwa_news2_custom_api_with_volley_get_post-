@@ -26,17 +26,16 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:background="@drawable/login_bac"
+            android:background="@color/black"
             android:padding="20dp"
             >
-<ImageView
-    android:id="@+id/nav_user_profile_image"
-    android:layout_width="100dp"
-    android:layout_height="100dp"
-    android:layout_centerVertical="true"
-    android:src="@drawable/user"
 
-    />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/nav_user_profile_image"
+                android:layout_width="120dp"
+                android:layout_height="300dp"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/user" />
 
       <TextView
             android:id="@+id/nav_user_profile_name"
@@ -51,6 +50,7 @@
           android:includeFontPadding="false"
           android:textSize="20dp"
 
+
           />
 
             <TextView
@@ -62,7 +62,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="10dp"
                 android:layout_toEndOf="@id/nav_user_profile_image"
-                android:textSize="16dp"
+                android:textSize="12dp"
                 android:textColor="@color/white"
                 />
 
@@ -74,52 +74,37 @@
             android:orientation="vertical"
             android:padding="16dp"
             >
-            
+
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout_user_profile_name"
+                android:id="@+id/textInputLayout_user_profile_nom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:hint="Nom complet"
+                android:hint="Nouveau nom"
                 >
-                <com.google.android.material.textfield.TextInputEditText
+                <EditText
+                    android:id="@+id/Edit_nav_user_profile_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                     android:drawableStart="@drawable/ic_baseline_person_pin_24"
+                    android:drawableStart="@drawable/ic_baseline_person_pin_24"
                     android:drawablePadding="10dp"
-                    android:text="Nom de l'utilisateur"
-
                     />
             </com.google.android.material.textfield.TextInputLayout>>
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout_user_profile_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:hint="votre email"
-                >
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_baseline_email_24"
-                    android:drawablePadding="10dp"
-                    android:text="Adresse email"
 
-                    />
-            </com.google.android.material.textfield.TextInputLayout>>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout_user_profile_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:hint="votre numéro de téléphone"
+                android:hint="Nouveau numéro"
                 >
-                <com.google.android.material.textfield.TextInputEditText
+                <EditText
+                    android:id="@+id/nav_user_profile_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_baseline_local_phone_24"
                     android:drawablePadding="10dp"
-                    android:text="Numéro de téléphone"
 
                     />
             </com.google.android.material.textfield.TextInputLayout>>
@@ -128,14 +113,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:hint="votre mot de passe"
+                android:hint="Nouveau mot de passe"
                 >
-                <com.google.android.material.textfield.TextInputEditText
+                <EditText
+                    android:id="@+id/nav_user_profile_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_baseline_keyboard_24"
                     android:drawablePadding="10dp"
-                    android:text="Mot de passe"
 
                     />
             </com.google.android.material.textfield.TextInputLayout>>
@@ -151,7 +136,5 @@
                 />
 
         </LinearLayout>
-
     </LinearLayout>
-
 </ScrollView>
