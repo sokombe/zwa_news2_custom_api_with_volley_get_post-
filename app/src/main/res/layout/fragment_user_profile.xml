@@ -26,7 +26,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:background="@color/black"
+            android:background="@drawable/bac_profile"
             android:padding="20dp"
             >
 
