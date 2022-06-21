@@ -1,5 +1,4 @@
 package com.example.zwanews;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,7 +38,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-
 
 public class MainActivity extends AppCompatActivity {
 

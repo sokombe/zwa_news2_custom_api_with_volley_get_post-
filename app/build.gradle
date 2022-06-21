@@ -8,11 +8,11 @@ android {
 
     defaultConfig {
         applicationId "com.example.zwanews"
-        minSdk 21
+        minSdk 19
         targetSdk 32
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -64,6 +64,10 @@ dependencies {
     //add admob
     implementation 'com.google.android.gms:play-services-ads:21.0.0'
 
+    // to fix the error:Duplicate class com.google.common.util.concurrent.ListenableFuture found in modules guava-20.0.jar (com.google.guava:guava:20.0)
+//    implementation 'com.google.firebase:firebase-inappmessaging-display:17.2.0'
+//    implementation 'com.google.guava:guava:27.0.1-android'
 
+    implementation 'com.android.support:multidex:1.0.3'
 
 }
