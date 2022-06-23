@@ -52,22 +52,21 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.8'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-
-
     implementation group: 'com.airbnb.android', name: 'lottie', version: '5.2.0'
-
 
     // https://mvnrepository.com/artifact/de.hdodenhof/circleimageview
     implementation group: 'de.hdodenhof', name: 'circleimageview', version: '3.1.0'
-//rounded
+    //rounded
     implementation 'com.makeramen:roundedimageview:2.3.0'
     //add admob
-    implementation 'com.google.android.gms:play-services-ads:21.0.0'
+    // https://mvnrepository.com/artifact/com.google.android.gms/play-services-ads
+    implementation group: 'com.google.android.gms', name: 'play-services-ads', version: '21.0.0'
 
-    // to fix the error:Duplicate class com.google.common.util.concurrent.ListenableFuture found in modules guava-20.0.jar (com.google.guava:guava:20.0)
-//    implementation 'com.google.firebase:firebase-inappmessaging-display:17.2.0'
-//    implementation 'com.google.guava:guava:27.0.1-android'
 
-    implementation 'com.android.support:multidex:1.0.3'
+    //    to fix the error:Duplicate class com.google.common.util.concurrent.ListenableFuture found in modules guava-20.0.jar (com.google.guava:guava:20.0)
+    //    implementation 'com.google.firebase:firebase-inappmessaging-display:17.2.0'
+    //    implementation 'com.google.guava:guava:27.0.1-android'
+
+          implementation 'com.android.support:multidex:1.0.3'
 
 }

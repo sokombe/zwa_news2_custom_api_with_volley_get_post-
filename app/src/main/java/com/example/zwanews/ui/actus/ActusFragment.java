@@ -35,6 +35,7 @@ import com.example.zwanews.RequestMAnager.OnFetchDataListener;
 import com.example.zwanews.RequestMAnager.RequestManager;
 import com.example.zwanews.databinding.FragmentActusBinding;
 import com.example.zwanews.ui.Login_and_splash.Splash;
+/*
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -47,6 +48,7 @@ import com.google.android.gms.ads.initialization.OnInitializationCompleteListene
 import com.google.android.gms.ads.rewarded.RewardItem;
 import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
+ */
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -64,10 +66,10 @@ public class ActusFragment extends Fragment  implements View.OnClickListener {
 //https://newsapi.org/docs/endpoints/top-headlines
 
     // for ads banner
-    AdView mAdView;
+    //AdView mAdView;
 
     // for ads reward
-    private RewardedAd mRewardedAd;
+    //private RewardedAd mRewardedAd;
     private final String TAG = "MainActivity";
 
     RecyclerView recyclerView;
@@ -305,7 +307,7 @@ public class ActusFragment extends Fragment  implements View.OnClickListener {
 
 
     // #######################################  for ads banner ################################################
-    private void loadBaner() {
+  /*  private void loadBaner() {
         // initialize admob
         MobileAds.initialize(getActivity(), new OnInitializationCompleteListener() {
             @Override
@@ -317,9 +319,9 @@ public class ActusFragment extends Fragment  implements View.OnClickListener {
         AdRequest adRequest = new AdRequest.Builder().build();
 //        mAdView.loadAd(adRequest);
     }
-
+*/
     // #######################################  for ads reward ################################################
-    private  void loadvideosreward(){
+  /*  private  void loadvideosreward(){
         AdRequest adRequest = new AdRequest.Builder().build();
 
         RewardedAd.load(getActivity(), getString(R.string.recompense_id),
@@ -375,4 +377,6 @@ public class ActusFragment extends Fragment  implements View.OnClickListener {
             Log.d(TAG, "The rewarded ad wasn't ready yet.");
         }
     }
+    */
+
 }
