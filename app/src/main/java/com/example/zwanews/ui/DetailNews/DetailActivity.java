@@ -139,7 +139,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 //              usercomments.document(mauth.getCurrentUser().getEmail()+"|"+getCurrentDateAndTime()).set(comment)
 
                     usercomments.document().set(comment).addOnSuccessListener(new OnSuccessListener<Void>() {
-
+    
                     @Override
                     public void onSuccess(Void unused) {
 
