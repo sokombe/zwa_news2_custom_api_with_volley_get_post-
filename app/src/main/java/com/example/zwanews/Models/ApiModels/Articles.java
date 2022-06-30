@@ -3,20 +3,49 @@ package com.example.zwanews.Models.ApiModels;
 import java.io.Serializable;
 
 public class Articles implements Serializable {
-    Source source;
+    String source;
     String author;
     String title;
-    String description;
-    String url;
-    String urlToImage;
-    String publishedAt;
     String content;
 
-    public Source getSource() {
+    public Articles(String source, String author, String title, String content, String link, String category_id, String createdAt, String language) {
+        this.source = source;
+        this.author = author;
+        this.title = title;
+        this.content = content;
+        this.link = link;
+        this.category_id = category_id;
+        this.createdAt = createdAt;
+        this.language = language;
+    }
+
+    String link;
+    String category_id;
+
+    public String getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(String category_id) {
+        this.category_id = category_id;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    String createdAt;
+    String language;
+
+    public String getSource() {
         return source;
     }
 
-    public void setSource(Source source) {
+    public void setSource(String source) {
         this.source = source;
     }
 
@@ -36,36 +65,24 @@ public class Articles implements Serializable {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+
+
+    public String getLink() {
+        return link;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setLink(String link) {
+        this.link = link;
     }
 
-    public String getUrl() {
-        return url;
+
+
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getUrlToImage() {
-        return urlToImage;
-    }
-
-    public void setUrlToImage(String urlToImage) {
-        this.urlToImage = urlToImage;
-    }
-
-    public String getPublishedAt() {
-        return publishedAt;
-    }
-
-    public void setPublishedAt(String publishedAt) {
-        this.publishedAt = publishedAt;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
     public String getContent() {

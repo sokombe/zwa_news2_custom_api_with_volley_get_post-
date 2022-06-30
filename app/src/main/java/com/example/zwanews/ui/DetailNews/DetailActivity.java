@@ -110,18 +110,18 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
         textView_title.setText(article.getTitle());
         textView_content.setText(article.getContent());
-        textView_desc.setText(article.getDescription());
+        textView_desc.setText(article.getContent());
         textView_author.setText(article.getAuthor());
-        textView_time.setText(article.getPublishedAt());
+        textView_time.setText(article.getCreatedAt());
         textView_nombre_comment.setText(String.valueOf(commentsSize)+" Commentaire(s)");
-        textView_url.setText(article.getUrl());
+        textView_url.setText(article.getLink());
 
 
 
 
 
         Picasso.get()
-                .load(article.getUrlToImage())
+                .load(article.getLink())
                 .noFade()
                 .resize(300,300)
                 .centerCrop()
@@ -134,7 +134,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
             if(!editText.getText().toString().isEmpty()){
 
-                Comments comment=new Comments(article.getPublishedAt().toString(),editText.getText().toString(),getCurrentDateAndTime(),mauth.getCurrentUser().getEmail());
+                Comments comment=new Comments(article.getCreatedAt().toString(),editText.getText().toString(),getCurrentDateAndTime(),mauth.getCurrentUser().getEmail());
 //
 //              usercomments.document(mauth.getCurrentUser().getEmail()+"|"+getCurrentDateAndTime()).set(comment)
 
@@ -149,7 +149,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                         getallcomment.clear();
 
                         usercomments
-                                .whereEqualTo("fk_new",article.getPublishedAt())
+                                .whereEqualTo("fk_new",article.getCreatedAt())
                                 .get()
 
                                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -203,7 +203,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     private void share() {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, article.getTitle()+"\n"+article.getDescription()+"\n"+article.getUrl());
+        sendIntent.putExtra(Intent.EXTRA_TEXT, article.getTitle()+"\n"+article.getContent()+"\n"+article.getLink());
         sendIntent.setType("text/plain");
         if(sendIntent.resolveActivity(getPackageManager())!=null)
         {
@@ -236,7 +236,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         getallcomment.clear();
 
         usercomments
-                .whereEqualTo("fk_new",article.getPublishedAt())
+                .whereEqualTo("fk_new",article.getCreatedAt())
                 .get()
                 .addOnSuccessListener(this,new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -276,7 +276,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
     public void   LauchUrl(View view){
         Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri.parse(article.getUrl()));
+        i.setData(Uri.parse(article.getLink()));
         startActivity(i);
     }
 
@@ -311,7 +311,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
              share();
                 break;
             case R.id.copy_in_clopboard:
-                copyinClipboard(article.getTitle()+"\n"+article.getDescription()+"\n"+article.getUrl());
+                copyinClipboard(article.getTitle()+"\n"+article.getContent()+"\n"+article.getLink());
                 break;
         }
         return super.onOptionsItemSelected(item);

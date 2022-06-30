@@ -41,10 +41,10 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.CustomVi
     public void onBindViewHolder(@NonNull CustomViewHolder myView, int position) {
 
         myView.text_title.setText(news.get(position).getTitle());
-        myView.text_source.setText(news.get(position).getSource().getName() );
+        myView.text_source.setText(news.get(position).getSource());
 
-        if(news.get(position).getUrlToImage()!=null){
-            Picasso.get().load(news.get(position).getUrlToImage()).placeholder(com.example.zwanews.R.drawable.loading).into(myView.img_headline)    ;
+        if(news.get(position).getLink()!=null){
+            Picasso.get().load(news.get(position).getLink()).placeholder(com.example.zwanews.R.drawable.loading).into(myView.img_headline)    ;
         }
 
         myView.cardView.setOnClickListener(v -> {

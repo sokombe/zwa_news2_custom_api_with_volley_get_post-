@@ -69,4 +69,7 @@ dependencies {
 
           implementation 'com.android.support:multidex:1.0.3'
 
+    // https://mvnrepository.com/artifact/com.android.volley/volley
+    implementation group: 'com.android.volley', name: 'volley', version: '1.2.1'
+
 }
