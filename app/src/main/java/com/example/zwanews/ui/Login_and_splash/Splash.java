@@ -1,6 +1,8 @@
 package com.example.zwanews.ui.Login_and_splash;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.TextView;
@@ -28,7 +30,10 @@ public class Splash extends AppCompatActivity {
 
         // Initialise firebase
         auth = FirebaseAuth.getInstance();
-
+        
+        // I get the shared pref
+        SharedPreferences sharedPreferences= getApplicationContext().getSharedPreferences("User", Context.MODE_PRIVATE);
+        String email=sharedPreferences.getString("email","");
 
         appname=findViewById(R.id.appename);
         lottieAnimationView=findViewById(R.id.animationView);
@@ -42,6 +47,7 @@ public class Splash extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+
                 FirebaseUser user = auth.getCurrentUser();
                 if(user == null){
                     startActivity(new Intent(Splash.this, Login.class));
