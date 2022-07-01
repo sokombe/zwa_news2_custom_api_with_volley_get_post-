@@ -1,7 +1,9 @@
 package com.example.zwanews.ui.Login_and_splash;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -51,6 +53,10 @@ public class Login extends AppCompatActivity {
 
     ProgressDialog progressDialog;
 
+    // for sharedpreferences
+    SharedPreferences sharedPreferences;
+
+
 
     // list of users
     List<Users> usersList=new ArrayList<>();
@@ -61,6 +67,8 @@ public class Login extends AppCompatActivity {
         setContentView(com.example.zwanews.R.layout.activity_login);
 
         mAuth=FirebaseAuth.getInstance();
+        //init sharedpreferences
+        sharedPreferences=getSharedPreferences("User", Context.MODE_PRIVATE);
 
         etLoginEmail = findViewById(R.id.EditEmail);
         etLoginPassword = findViewById(R.id.Password);
@@ -107,6 +115,9 @@ public class Login extends AppCompatActivity {
             etLoginPassword.requestFocus();
         }else{
 
+            // we prepare our share to edit
+            SharedPreferences.Editor shareEdit=sharedPreferences.edit();
+
                  boolean isRegistred=false;
                 progressDialog.setMessage("Verification...");
                 progressDialog.show();
@@ -114,12 +125,20 @@ public class Login extends AppCompatActivity {
            for(int i=0;i<usersList.size();i++){
                if( usersList.get(i).getEmail().equals(email)&&usersList.get(i).getPassword().equals(password )){
                    isRegistred=true;
+
+                    // we save the user email ------------------------
+                    shareEdit.putString("email",email);
+                    shareEdit.commit();
+                    //------------------------------------------------
+
                    break;
                }
            }
 
            if(isRegistred==true){
                progressDialog.dismiss();
+
+
             startActivity(new Intent(Login.this,MainActivity.class));
             finish();
 

@@ -1,7 +1,9 @@
 package com.example.zwanews.ui.Login_and_splash;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -61,6 +63,8 @@ public class Signin extends AppCompatActivity {
     // list of users
     List<Users> usersList=new ArrayList<>();
 
+    // for sharedpreferences
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,8 +80,10 @@ public class Signin extends AppCompatActivity {
         phone=findViewById(R.id.phone);
 
 
-
+        // init firebase
         mAuth = FirebaseAuth.getInstance();
+        //init sharedpreferences
+        sharedPreferences=getSharedPreferences("User", Context.MODE_PRIVATE);
 
         progressDialog =new ProgressDialog(Signin.this);
 
@@ -128,22 +134,34 @@ public class Signin extends AppCompatActivity {
         }
         else{
 
+
+            // we prepare our share to edit
+            SharedPreferences.Editor shareEdit=sharedPreferences.edit();
+
             progressDialog.setMessage("Verification...");
             progressDialog.show();
-            boolean emalexist=false;
+
+            boolean emailExists=false;
 
           for (int i=0;i<usersList.size();i++) {
               if(usersList.get(i).getEmail().equals(email)){
-                  emalexist=true;
-                  Toast.makeText(this, "Email déjà eistant", Toast.LENGTH_SHORT).show();
+                  emailExists=true;
                   progressDialog.dismiss();
+                  break;
               }
-
           }
-             if(!emalexist) {
-                //  post request
-                adduser(username,nom,email,password,myphone);
+
+             if(emailExists) {
+                 Toast.makeText(this, "Email déjà eistant", Toast.LENGTH_SHORT).show();
             }
+             else {
+                 // we save the user email ------------------------
+                 shareEdit.putString("email",email);
+                 shareEdit.commit();
+                 //  post request ---------------------------------
+                 adduser(username,nom,email,password,myphone);
+                 //------------------------------------------------
+             }
         }
     }
 

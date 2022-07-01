@@ -1,6 +1,8 @@
 package com.example.zwanews.ui.actus;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.zwanews.MainActivity;
 import com.example.zwanews.Models.ApiModels.Articles;
 import com.example.zwanews.Models.ApiModels.JsonResponse;
 import com.example.zwanews.Models.GlobalVariables_and_public_functions;
@@ -65,16 +68,12 @@ import java.util.List;
 public class ActusFragment extends Fragment  implements View.OnClickListener {
 
     // https://newsapi.org/v2/top-headlines?country=us&apiKey=34123614cde84413a1b0af3451082009
-//https://newsapi.org/docs/endpoints/top-headlines
+   //https://newsapi.org/docs/endpoints/top-headlines
 
     //-------------------------  get all articles --------------------------
     List<Articles> articles=new ArrayList<>();
     //------------------------------------------------------------------
 
-    // for ads banner
-    //AdView mAdView;
-
-    // for ads reward
     //private RewardedAd mRewardedAd;
     private final String TAG = "MainActivity";
 
@@ -166,15 +165,8 @@ public class ActusFragment extends Fragment  implements View.OnClickListener {
         progressDialog.show();
         progressDialog.setCancelable(true);
 
-
         //--------------------------------- we get data on int ----------------------------
-
-
-
         getAlldata();
-
-
-
         //------------------------------------ end ----------------------------------------------
 
         // we begin with fetching data
@@ -190,8 +182,6 @@ public class ActusFragment extends Fragment  implements View.OnClickListener {
         super.onDestroyView();
         binding = null;
     }
-
-
 
     @Override
     public void onStart() {
@@ -224,31 +214,6 @@ public class ActusFragment extends Fragment  implements View.OnClickListener {
     }
 
     //########################################################################################################
-    private final OnFetchArticlesListener<List<Articles>> listener=new OnFetchArticlesListener<List<Articles>>() {
-
-        @Override
-        public void onFetchData(List<Articles> list, String message) {
-            // show data in recyclerview
-            ShowNews(list);
-        }
-        @Override
-        public void onError(String message) {
-
-        }
-    };
-    //######################################################################################################################
-    // the show data function for showing in the recyclerview
-    private void ShowNews(List<Articles> list) {
-
-        recyclerView=getView().findViewById(R.id.Recycler_main);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),1));
-        adapter=new RecycleAdapter(getActivity(),list);
-        recyclerView.setAdapter(adapter);
-        // we dismiss the progress when data are showed
-        progressDialog.dismiss();
-
-    }
 
     @Override
     public void onClick(View v) {
@@ -295,8 +260,24 @@ public class ActusFragment extends Fragment  implements View.OnClickListener {
             getAlldataByCategoryId(category);
         }
 
+       // SharedPreferences sharedPreferences= getActivity().getSharedPreferences("User", Context.MODE_PRIVATE);
+       // String email=sharedPreferences.getString("email","");
+       // Toast.makeText(getActivity(), email, Toast.LENGTH_SHORT).show();
+
     }
 
+    // the show data function for showing in the recyclerview
+    private void ShowNews(List<Articles> list) {
+
+        recyclerView=getView().findViewById(R.id.Recycler_main);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),1));
+        adapter=new RecycleAdapter(getActivity(),list);
+        recyclerView.setAdapter(adapter);
+        // we dismiss the progress when data are showed
+        progressDialog.dismiss();
+
+    }
     //###################### for viewFlipper #########################################"
     public  void setViewFlipper(int image){
 
@@ -382,7 +363,7 @@ public class ActusFragment extends Fragment  implements View.OnClickListener {
 
         requestQueue.add(jsonArrayRequest);
     }
-
+//// parseArray ----------------------------------------------------
     private void  parseArray(JSONArray jsonArray){
         for(int i=0;i<jsonArray.length();i++){
             // initialize json Object
