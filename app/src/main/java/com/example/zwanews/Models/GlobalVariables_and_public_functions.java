@@ -7,34 +7,34 @@ public class GlobalVariables_and_public_functions {
 
 // public variables ################################################################################
   public static   Map<String, Object> UsersProfiles=new HashMap<>();
-  public  static Users userProfile=new Users();
+  //public  static Users userProfile=new Users();
 
 
   // public functions###############################################################################
- public static String getfrench(String eng){
+ public static String getcatname(String id){
     String retur="";
 
-    switch (eng){
-      case "general":
+    switch (id){
+      case "1":
         retur="Géneral";
         break;
-      case "business":
+      case "2":
         retur="Busness";
         break;
-      case "entertainment":
+      case "3":
         retur="Loisir";
         break;
 
-      case "health":
+      case "4":
         retur="Santé";
         break;
-      case "science":
+      case "5":
         retur="Science";
         break;
-      case "sports":
+      case "6":
         retur="Sports";
         break;
-      case "technology":
+      case "7":
         retur="Technologies";
     }
     return  retur;

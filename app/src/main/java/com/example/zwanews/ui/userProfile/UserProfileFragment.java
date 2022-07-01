@@ -199,7 +199,7 @@ public class UserProfileFragment extends Fragment {
                                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setPhotoUri(uri).build();
                                 FirebaseAuth.getInstance().getCurrentUser().updateProfile(profileUpdates);
 
-                                addToDatabase(FirebaseAuth.getInstance().getCurrentUser().getDisplayName(), uri.toString());
+                             //   addToDatabase(FirebaseAuth.getInstance().getCurrentUser().getDisplayName(), uri.toString());
 
                             }
                         });
@@ -218,7 +218,7 @@ public class UserProfileFragment extends Fragment {
         }
     }
 
-
+/*
     private void addToDatabase(String name, String url) {
 
 
@@ -242,7 +242,7 @@ public class UserProfileFragment extends Fragment {
                     }
                 });
     }
-
+*/
     private void gottomain() {
         startActivity(new Intent(getActivity(), MainActivity.class));
         getActivity().finish();

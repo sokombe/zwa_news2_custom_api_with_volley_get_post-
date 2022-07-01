@@ -3,45 +3,69 @@ package com.example.zwanews.Models;
 import com.google.firebase.firestore.Exclude;
 
 public class Users {
-    String userEmail;
-    String displayname;
-    String Url;
+    String id;
+    String email;
 
-    public Users(String displayname, String url) {
-        this.displayname = displayname;
-        Url = url;
-    }
-    public String getdisplayname() {
-
-        return displayname;
-    }
-    public void setdisplayname(String displayName) {
-
-        displayname = displayName;
+    public String getId() {
+        return id;
     }
 
-    public Users() {
-
+    public void setId(String id) {
+        this.id = id;
     }
 
-    @Exclude
-    public String getUserEmail() {
+    String firstname;
+    String secondname;
+    String password;
+    String phone;
 
-        return userEmail;
+
+    public Users( String id,String firstname, String secondname, String email,String password, String phone) {
+        this.email = email;
+        this.firstname = firstname;
+        this.secondname = secondname;
+        this.password = password;
+        this.phone = phone;
+        this.id=id;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public String getEmail() {
+        return email;
     }
 
-
-    public String getUrl() {
-        return Url;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setUrl(String url) {
-        Url = url;
+    public String getFirstname() {
+        return firstname;
     }
 
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
 
+    public String getSecondname() {
+        return secondname;
+    }
+
+    public void setSecondname(String secondname) {
+        this.secondname = secondname;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 }

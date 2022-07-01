@@ -171,7 +171,7 @@ public class ActusFragment extends Fragment  implements View.OnClickListener {
 
 
 
-                getdata();
+        getAlldata();
 
 
 
@@ -196,6 +196,7 @@ public class ActusFragment extends Fragment  implements View.OnClickListener {
     @Override
     public void onStart() {
         super.onStart();
+      /*
         Allusers
                 .get()
                 .addOnSuccessListener(getActivity(),new OnSuccessListener<QuerySnapshot>() {
@@ -219,7 +220,7 @@ public class ActusFragment extends Fragment  implements View.OnClickListener {
                         Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_SHORT).show();
                     }
                 });
-
+*/
     }
 
     //########################################################################################################
@@ -260,36 +261,39 @@ public class ActusFragment extends Fragment  implements View.OnClickListener {
         switch (image.getId())
         {
             case R.id.Image_cat_tout:
-                category="general";
+                category="1";
                 break;
             case R.id.Image_cat_Affaire:
-                category="business";
+                category="2";
                 break;
             case R.id.Image_cat_Divers:
-                category="entertainment";
+                category="3";
                 break;
             case R.id.Image_cat_Sante:
-                category="health";
+                category="4";
                 break;
             case R.id.Image_cat_Science:
-                category="science";
+                category="5";
                 break;
             case R.id.Image_cat_Sport:
-                category="sports";
+                category="6";
                 break;
             default:
-                category="technology";
+                category="7";
 
         }
 
         /// we begin fetching
-        progressDialog.setMessage("Chargerment de news catégorie "+ GlobalVariables_and_public_functions.getfrench(category));
+        progressDialog.setMessage("Chargerment de news catégorie "+ GlobalVariables_and_public_functions.getcatname(category));
         progressDialog.show();
         progressDialog.setCancelable(true);
 
-        // we call the article request manager to fetch data by category
-        ArticleRequestManager manager=new ArticleRequestManager(getActivity());
-       // manager.getArticles(listener,"fr",category,null);
+        if(category.equals("1")){
+            getAlldata();
+        }
+        else {
+            getAlldataByCategoryId(category);
+        }
 
     }
 
@@ -313,13 +317,14 @@ public class ActusFragment extends Fragment  implements View.OnClickListener {
     }
 
     //----------------------------------- get all articles ------------------------------
-    private  void getdata(){
+    private  void getAlldata(){
+        articles.clear();
      // if the api return an array [], we have to create a   JsonArrayRequest instance  and expeting JSONArray
         // if json {} we have to create a JsonObjectRequest instance and expeting a JsonObjet
         // we can expect a String with RequestString
 
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, "http://192.168.43.56:8080/api/articles/getallArticles", null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, "http://192.168.1.100:8080/api/articles/getallArticles", null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {
@@ -344,7 +349,39 @@ public class ActusFragment extends Fragment  implements View.OnClickListener {
 
         requestQueue.add(jsonArrayRequest);
     }
+    //----------------------------------- get all articles by category id ------------------------------
+    private  void getAlldataByCategoryId(String id_category){
+        articles.clear();
+        // if the api return an array [], we have to create a   JsonArrayRequest instance  and expeting JSONArray
+        // if json {} we have to create a JsonObjectRequest instance and expeting a JsonObjet
+        // we can expect a String with RequestString
 
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, "http://192.168.1.100:8080/api/articles/"+id_category+"/getAllArticleByCategory", null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+
+                    if(response!=null){
+                        // use for loop
+                        parseArray( response);
+
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+
+        requestQueue.add(jsonArrayRequest);
+    }
 
     private void  parseArray(JSONArray jsonArray){
         for(int i=0;i<jsonArray.length();i++){

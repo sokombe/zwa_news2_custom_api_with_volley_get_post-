@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        retriveUserProfile();
+      //  retriveUserProfile();
 
         //View userprofile = View.inflate(this, R.layout.fragment_user_profile, null);
         // init fields
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-
+/*
         //set the profile picture
         if (auth.getCurrentUser() != null) {
             profile_name.setText(auth.getCurrentUser().getDisplayName());
@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Picasso.get().load(R.drawable.user).into(profile_image);
         }
-
+*/
 
     }
 
@@ -197,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
+/*
     public void retriveUserProfile(){ // single note to read
         UsersCollection.document(FirebaseAuth.getInstance().getCurrentUser().getEmail()).get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -234,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
         ;
 
     }
-
+*/
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);

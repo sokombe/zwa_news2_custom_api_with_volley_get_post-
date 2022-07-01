@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,12 +14,31 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.zwanews.MainActivity;
+import com.example.zwanews.Models.ApiModels.Articles;
+import com.example.zwanews.Models.Users;
 import com.example.zwanews.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Login extends AppCompatActivity {
 
@@ -31,6 +51,9 @@ public class Login extends AppCompatActivity {
 
     ProgressDialog progressDialog;
 
+
+    // list of users
+    List<Users> usersList=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +84,16 @@ public class Login extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        getallUsers();
+
+    }
 
 
-    //#####################################################################################################
+//#####################################################################################################
 
     private void loginUser(){
         String email = etLoginEmail.getText().toString();
@@ -77,25 +107,90 @@ public class Login extends AppCompatActivity {
             etLoginPassword.requestFocus();
         }else{
 
-            progressDialog.setMessage("Verification...");
-            progressDialog.show();
+                 boolean isRegistred=false;
+                progressDialog.setMessage("Verification...");
+                progressDialog.show();
 
-            mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    progressDialog.dismiss();
+           for(int i=0;i<usersList.size();i++){
+               if( usersList.get(i).getEmail().equals(email)&&usersList.get(i).getPassword().equals(password )){
+                   isRegistred=true;
+                   break;
+               }
+           }
 
-                    if (task.isSuccessful()){
-                        Toast.makeText(Login.this, "Bienvenue", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(Login.this, MainActivity.class));
-                        finish();
-                    }else{
-                        Toast.makeText(Login.this, "Erreur de connexion: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+           if(isRegistred==true){
+               progressDialog.dismiss();
+            startActivity(new Intent(Login.this,MainActivity.class));
+            finish();
+
+           }
+           else {
+               Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show();
+               progressDialog.dismiss();
+           }
+           }
+        }
+
+
+
+    // -------------------------------------- we get all users first -------------------------------------
+    private void getallUsers() {
+        // url to post our data
+        // String url = "https://reqres.in/api/users";
+        String url="http://192.168.1.100:8080/api/users/getallUsers";
+
+
+        RequestQueue requestQueue = Volley.newRequestQueue(Login.this);
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+
+                    if(response!=null){
+                        // use for loop
+                        parseArray( response);
+
                     }
 
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            });
-        }
-    }
+            }
 
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+
+        requestQueue.add(jsonArrayRequest);
+    }
+// ----------------------------------------- end ---------------------------------------------------------------
+
+
+    private void  parseArray(JSONArray jsonArray){
+        for(int i=0;i<jsonArray.length();i++){
+            // initialize json Object
+            try {
+
+                JSONObject article=jsonArray.getJSONObject(i);
+                usersList.add(
+                        new Users(
+                                article.getString("id"),
+                                article.getString("firstname"),
+                                article.getString("secondname"),
+                                article.getString("email"),
+                                article.getString("password"),
+                                article.getString("phone")
+                        )
+                );
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+    //----------------------------------------  end ----------------------------------------
 }
