@@ -372,6 +372,7 @@ public class ActusFragment extends Fragment  implements View.OnClickListener {
                 JSONObject article=jsonArray.getJSONObject(i);
                 articles.add(
                         new Articles(
+                                article.getString("id"),
                                 article.getString("title"),
                                 article.getString("author"),
                                 article.getString("content"),

@@ -4,46 +4,15 @@ import com.google.firebase.firestore.Exclude;
 
 import java.io.Serializable;
 
-public class Comments  implements  Serializable{
-    String idcomment;
-    String fk_new;
+public class Comments  implements  Serializable {
     String content;
-    String date_comment;
-    String user_id;
+    String id_article;
+    String id_user;
 
-    @Exclude
-    public String getIdcomment() {
-        return idcomment;
-    }
-
-    public Comments( String fk_new, String content, String date_comment,String user_id) {
-        this.fk_new = fk_new;
+    public Comments(String content, String id_article, String id_user) {
         this.content = content;
-        this.date_comment = date_comment;
-        this.user_id = user_id;
-    }
-
-    public Comments() {
-
-    }
-
-    public String getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
-    }
-    public String getFk_new() {
-        return fk_new;
-    }
-
-    public void setFk_new(String fk_new) {
-        this.fk_new = fk_new;
-    }
-
-    public void setIdcomment(String idcomment) {
-        this.idcomment = idcomment;
+        this.id_article = id_article;
+        this.id_user = id_user;
     }
 
     public String getContent() {
@@ -54,13 +23,23 @@ public class Comments  implements  Serializable{
         this.content = content;
     }
 
-    public String getDate_comment() {
-        return date_comment;
+
+
+
+
+    public String getId_article() {
+        return id_article;
     }
 
-    public void setDate_comment(String date_comment) {
-        this.date_comment = date_comment;
+    public void setId_article(String id_article) {
+        this.id_article = id_article;
     }
 
+    public String getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(String id_user) {
+        this.id_user = id_user;
+    }
 }
-

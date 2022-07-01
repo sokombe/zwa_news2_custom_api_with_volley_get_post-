@@ -1,6 +1,6 @@
 package com.example.zwanews.Helper;
 
-
+/*
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -100,3 +100,4 @@ public class Helper extends SQLiteOpenHelper {
     }
 }
 
+*/

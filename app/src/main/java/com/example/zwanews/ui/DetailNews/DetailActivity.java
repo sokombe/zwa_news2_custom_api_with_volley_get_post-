@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -22,11 +23,20 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import com.example.zwanews.Helper.Helper;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+//import com.example.zwanews.Helper.Helper;
+import com.example.zwanews.MainActivity;
 import com.example.zwanews.Models.ApiModels.Articles;
 import com.example.zwanews.Models.Comments;
 import com.example.zwanews.R;
 import com.example.zwanews.ui.AllCommentsOfNews.AllComments;
+import com.example.zwanews.ui.Login_and_splash.Signin;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,6 +47,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -57,9 +71,9 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     Button button;
     EditText editText;
 
-    Helper helper=new Helper(this);
+   // Helper helper=new Helper(this);
     int commentsSize=0;
-    List<Comments> getallcomment=new ArrayList<>();
+    List<Comments> allcomments=new ArrayList<>();
 
     Button buttonCancel;
     AlertDialog alertDialog;
@@ -72,6 +86,9 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
     FirebaseAuth mauth;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +97,6 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         //set back button on toolbar and set title to toolbar as article title
           getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //        getSupportActionBar().setTitle(article.getTitle());
-
 
 
         textView_author=findViewById(R.id.text_detail_author);
@@ -105,19 +121,19 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         });
 
         article= (Articles) getIntent().getSerializableExtra("data");
-//          commentsSize=helper.getCommentSize(article.getPublishedAt());
-//        getallcomment=helper.getAllComments(article.getPublishedAt().toString());
+        // commentsSize=helper.getCommentSize(article.getPublishedAt());
+        //allcomments=helper.getAllComments(article.getPublishedAt().toString());
 
+
+
+        //--------------------------------------------------------------------------------
         textView_title.setText(article.getTitle());
         textView_content.setText(article.getContent());
         textView_desc.setText(article.getContent());
         textView_author.setText(article.getAuthor());
         textView_time.setText(article.getCreatedAt());
-        textView_nombre_comment.setText(String.valueOf(commentsSize)+" Commentaire(s)");
+       // textView_nombre_comment.setText(String.valueOf(commentsSize)+" Commentaire(s)");
         textView_url.setText(article.getLink());
-
-
-
 
 
         Picasso.get()
@@ -130,66 +146,23 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                 .placeholder(R.drawable.loading)
                 .into(imageView_detail);
 
+
+        ///// COMMENT BUTTON ----------------------------------------------------------------------
+
         button.setOnClickListener(v -> {
-
             if(!editText.getText().toString().isEmpty()){
+             addcomment(editText.getText().toString());
 
-                Comments comment=new Comments(article.getCreatedAt().toString(),editText.getText().toString(),getCurrentDateAndTime(),mauth.getCurrentUser().getEmail());
-//
-//              usercomments.document(mauth.getCurrentUser().getEmail()+"|"+getCurrentDateAndTime()).set(comment)
+            }
+        });
 
-                    usercomments.document().set(comment).addOnSuccessListener(new OnSuccessListener<Void>() {
-    
-                    @Override
-                    public void onSuccess(Void unused) {
-
-                        Toast.makeText(DetailActivity.this, "Commentaire ajouté avec succès!", Toast.LENGTH_SHORT).show();
-
-                        editText.setText("");
-                        getallcomment.clear();
-
-                        usercomments
-                                .whereEqualTo("fk_new",article.getCreatedAt())
-                                .get()
-
-                                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                            @Override
-                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-
-                                for(QueryDocumentSnapshot documentSnapshot:queryDocumentSnapshots ){
-                                    Comments comment =documentSnapshot.toObject(Comments.class);
-                                    comment.setIdcomment(documentSnapshot.getId());
-
-                                    getallcomment.add(comment);
-                                }
-
-                                commentsSize=getallcomment.size();
-                                textView_nombre_comment.setText(String.valueOf(commentsSize)+" Commentaire(s)");
-
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-
-                                Toast.makeText(DetailActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
-
-                            }});
-
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(DetailActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }});
 
         // show comments users ######################################################################################
-        textView_nombre_comment.setOnClickListener(v -> {
-            if(!getallcomment.isEmpty()) {
 
-                startActivity(new Intent(DetailActivity.this, AllComments.class).putExtra("data", (Serializable) getallcomment));
+        textView_nombre_comment.setOnClickListener(v -> {
+            if(!allcomments.isEmpty()) {
+
+             //   startActivity(new Intent(DetailActivity.this, AllComments.class).putExtra("data", (Serializable) allcomments));
             }
 
                 else {
@@ -197,7 +170,8 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
 
-        //
+
+        //----------------------------------------------------------------------------------------------------
     }
 
     private void share() {
@@ -220,59 +194,21 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
-
-
-
-
-
-
 //######################################################################################################################
 
     @Override
     protected void onStart() {
         super.onStart();
-
         editText.setText("");
-        getallcomment.clear();
+        allcomments.clear();
 
-        usercomments
-                .whereEqualTo("fk_new",article.getCreatedAt())
-                .get()
-                .addOnSuccessListener(this,new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) { // multiple snapshot with querydocumentsnapshot
-
-                        System.out.println("//###########################################################");
-
-                        for(QueryDocumentSnapshot documentSnapshot:queryDocumentSnapshots ){
-                            Comments comment =documentSnapshot.toObject(Comments.class);
-                            comment.setIdcomment(documentSnapshot.getId());
-                            System.out.println(comment.getDate_comment());
-                            getallcomment.add(comment);
-
-
-                        }
-                        commentsSize=getallcomment.size();
-                        System.out.println("//###########################################################");
-                        System.out.println(commentsSize);
-
-                        textView_nombre_comment.setText(String.valueOf(commentsSize)+" Commentaire(s)");
-
-
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(DetailActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-
-
+        getAllcommentByArticleId(article.getId());
+        // we get all comments by id
         //####################################################################################
 
     }
+
+
 
     public void   LauchUrl(View view){
         Intent i = new Intent(Intent.ACTION_VIEW);
@@ -324,6 +260,128 @@ private  void copyinClipboard(String text) {
     clipboard.setPrimaryClip(clip);
     Toast.makeText(this, "Copié dans le Clipbord", Toast.LENGTH_SHORT).show();
 }
+
+
+    //----------------------------------- get all articles by category id ------------------------------
+    private  void getAllcommentByArticleId(String id_article){
+        allcomments.clear();
+        RequestQueue requestQueue = Volley.newRequestQueue(DetailActivity.this);
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, "http://192.168.1.100:8080/api/comments/"+id_article+"/getallCommentById", null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    if(response!=null){
+                        // use for loop
+                        parseArray( response);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+
+        requestQueue.add(jsonArrayRequest);
+
+    }
+
+    //// parseArray ----------------------------------------------------
+    private void  parseArray(JSONArray jsonArray){
+
+        for(int i=0;i<jsonArray.length();i++){
+            // initialize json Object
+            try {
+
+                JSONObject comment=jsonArray.getJSONObject(i);
+                allcomments.add(
+                        new Comments(
+                                comment.getString("content"),
+                                comment.getString("id_article"),
+                                comment.getString("id_user")
+                        )
+                );
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+       // commentsSize=allcomments.size();
+        textView_nombre_comment.setText(String.valueOf(allcomments.size())+" Commentaire(s)");
+        Toast.makeText(this, String.valueOf(commentsSize), Toast.LENGTH_SHORT).show();
+
+    }
+    //----------------------------------------  end ----------------------------------------
+
+
+
+    private void addcomment(String content) {
+
+        SharedPreferences sharedPreferences= getApplicationContext().getSharedPreferences("User", Context.MODE_PRIVATE);
+         String email=sharedPreferences.getString("email","");
+
+        // url to post our data
+        // String url = "https://reqres.in/api/users";
+        String url="http://192.168.1.100:8080/api/comments/addComment";
+
+        // creating a new variable for our request queue
+        RequestQueue queue = Volley.newRequestQueue(DetailActivity.this);
+
+        // on below line we are calling a string
+        // request method to post the data to our API
+        // in this we are calling a post method.
+        StringRequest request = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                editText.setText("");
+                getAllcommentByArticleId(article.getId());
+                Toast.makeText(DetailActivity.this, "Commentaire ajouté avec succès", Toast.LENGTH_SHORT).show();
+
+                try {
+
+                    JSONObject respObj = new JSONObject(response);
+
+                    String name = respObj.getString("content");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // method to handle errors.
+                Toast.makeText(DetailActivity.this, "Fail to get response = " + error, Toast.LENGTH_SHORT).show();
+                System.out.println( error);
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                // below line we are creating a map for
+                // storing our values in key and value pair.
+                Map<String, String> params = new HashMap<String, String>();
+
+                // on below line we are passing our key
+                // and value pair to our parameters.
+                params.put("content", content);
+                params.put("id_article", article.getId());
+                params.put("id_user", email);
+
+
+                return params;
+            }
+        };
+        // below line is to make
+        // a json object request.
+        queue.add(request);
+    }
+
 }
 
 

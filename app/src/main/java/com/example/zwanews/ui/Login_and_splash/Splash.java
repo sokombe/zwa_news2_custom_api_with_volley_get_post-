@@ -30,7 +30,7 @@ public class Splash extends AppCompatActivity {
 
         // Initialise firebase
         auth = FirebaseAuth.getInstance();
-        
+
         // I get the shared pref
         SharedPreferences sharedPreferences= getApplicationContext().getSharedPreferences("User", Context.MODE_PRIVATE);
         String email=sharedPreferences.getString("email","");

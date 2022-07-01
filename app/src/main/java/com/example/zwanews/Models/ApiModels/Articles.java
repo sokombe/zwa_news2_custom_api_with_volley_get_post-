@@ -3,12 +3,22 @@ package com.example.zwanews.Models.ApiModels;
 import java.io.Serializable;
 
 public class Articles implements Serializable {
+    String id;
     String source;
     String author;
     String title;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     String content;
 
-    public Articles(String source, String author, String title, String content, String link, String category_id, String createdAt, String language) {
+    public Articles(String id,String source, String author, String title, String content, String link, String category_id, String createdAt, String language) {
         this.source = source;
         this.author = author;
         this.title = title;
@@ -17,6 +27,7 @@ public class Articles implements Serializable {
         this.category_id = category_id;
         this.createdAt = createdAt;
         this.language = language;
+        this.id=id;
     }
 
     String link;
