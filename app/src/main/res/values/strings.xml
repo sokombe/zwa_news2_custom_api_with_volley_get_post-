@@ -18,4 +18,7 @@
     <string name="banner_id">ca-app-pub-6011922813320216/1324851426</string>
     <string name="interstitial_id">ca-app-pub-1692433296455441/1774485552</string>
     <string name="recompense_id">ca-app-pub-1692433296455441/6716940603</string>
+
+
+    <string name="LOCALHOST">192.168.43.56</string>
 </resources>

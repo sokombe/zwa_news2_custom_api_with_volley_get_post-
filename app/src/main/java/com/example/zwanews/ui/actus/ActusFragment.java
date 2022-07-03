@@ -305,7 +305,7 @@ public class ActusFragment extends Fragment  implements View.OnClickListener {
         // we can expect a String with RequestString
 
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, "http://192.168.1.100:8080/api/articles/getallArticles", null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, "http://"+getString(R.string.LOCALHOST)+":8080/api/articles/getallArticles", null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {
@@ -338,7 +338,7 @@ public class ActusFragment extends Fragment  implements View.OnClickListener {
         // we can expect a String with RequestString
 
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, "http://192.168.1.100:8080/api/articles/"+id_category+"/getAllArticleByCategory", null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, "http://"+getString(R.string.LOCALHOST)+":8080/api/articles/"+id_category+"/getAllArticleByCategory", null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {

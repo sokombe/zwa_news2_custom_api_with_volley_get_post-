@@ -266,7 +266,7 @@ private  void copyinClipboard(String text) {
     private  void getAllcommentByArticleId(String id_article){
         allcomments.clear();
         RequestQueue requestQueue = Volley.newRequestQueue(DetailActivity.this);
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, "http://192.168.1.100:8080/api/comments/"+id_article+"/getallCommentById", null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, "http://"+getString(R.string.LOCALHOST)+":8080/api/comments/"+id_article+"/getallCommentById", null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {
@@ -327,7 +327,7 @@ private  void copyinClipboard(String text) {
 
         // url to post our data
         // String url = "https://reqres.in/api/users";
-        String url="http://192.168.1.100:8080/api/comments/addComment";
+        String url="http://"+getString(R.string.LOCALHOST)+":8080/api/comments/addComment";
 
         // creating a new variable for our request queue
         RequestQueue queue = Volley.newRequestQueue(DetailActivity.this);
